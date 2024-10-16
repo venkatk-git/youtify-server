@@ -1,4 +1,4 @@
-const GoogleStratergy = require("passport-google-oauth20").Strategy;
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const passport = require("passport");
 const {
     CLIENT_ID,
@@ -16,14 +16,20 @@ passport.deserializeUser((user, done) => {
 });
 
 passport.use(
-    new GoogleStratergy({
-        clientID: CLIENT_ID,
-        clientSecret: CLIENT_SECRET,
-        callbackURL: CALLBACK_URL,
-        scope,
-        function(accessToken, refreshToken, profile, callback) {
+    new GoogleStrategy(
+        {
+            clientID: CLIENT_ID,
+            clientSecret: CLIENT_SECRET,
+            callbackURL: CALLBACK_URL,
+            scope: [
+                "profile",
+                "email",
+                "https://www.googleapis.com/auth/youtube.readonly",
+            ],
+        },
+        function (accessToken, refreshToken, profile, callback) {
             profile.accessToken = accessToken;
             callback(null, profile);
-        },
-    })
+        }
+    )
 );

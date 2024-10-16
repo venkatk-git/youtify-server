@@ -11,6 +11,8 @@ router.get("/login/success", (req, res) => {
             error: true,
             message: "Forbidden",
         });
+
+        return;
     }
 
     res.status(200).json({
@@ -35,7 +37,14 @@ router.get(
     })
 );
 
-router.get("/google", passport.authenticate("google", scope));
+router.get(
+    "/google",
+    passport.authenticate("google", [
+        "profile",
+        "email",
+        "https://www.googleapis.com/auth/youtube.readonly",
+    ])
+);
 
 router.get("/logout", (req, res) => {
     req.logout();
