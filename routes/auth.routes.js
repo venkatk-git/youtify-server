@@ -37,14 +37,7 @@ router.get(
     })
 );
 
-router.get(
-    "/google",
-    passport.authenticate("google", [
-        "profile",
-        "email",
-        "https://www.googleapis.com/auth/youtube.readonly",
-    ])
-);
+router.get("/google", passport.authenticate("google", scope));
 
 router.get("/logout", (req, res) => {
     req.logout();

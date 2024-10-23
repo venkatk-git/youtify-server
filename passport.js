@@ -21,11 +21,7 @@ passport.use(
             clientID: CLIENT_ID,
             clientSecret: CLIENT_SECRET,
             callbackURL: CALLBACK_URL,
-            scope: [
-                "profile",
-                "email",
-                "https://www.googleapis.com/auth/youtube.readonly",
-            ],
+            scope,
         },
         function (accessToken, refreshToken, profile, callback) {
             profile.accessToken = accessToken;
