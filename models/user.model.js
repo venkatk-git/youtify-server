@@ -1,10 +1,16 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const {
-    vedioLengthPreferenceEnum,
-    refreshFrequencyEnum,
-} = require("./lib/constants");
+const vedioLengthPreferenceEnum = ["short", "long", "any"];
+
+const refreshFrequencyEnum = ["daily", "weekly"];
+
+const playListItemsEnum = [
+    "video",
+    "playlist",
+    "smartPlaylist",
+    "communityPost",
+];
 
 const userSchema = new Schema({
     username: {
@@ -30,12 +36,12 @@ const userSchema = new Schema({
             default: [],
         },
         languagePreference: {
-            type: String,
+            type: [String],
             default: "en",
             required: true,
         },
         videoLengthPreference: {
-            type: String,
+            type: [String],
             enum: vedioLengthPreferenceEnum,
             default: "any",
         },
