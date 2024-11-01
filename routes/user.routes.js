@@ -4,7 +4,7 @@ const User = require("../models/user.model");
 
 const router = express.Router();
 
-router.post("/users", async (req, res) => {
+router.post("/", async (req, res) => {
     try {
         const { username, email, details, smartPlaylist, smartHistory } =
             req.body;
