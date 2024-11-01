@@ -6,7 +6,9 @@ const User = require("../models/user.model");
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
 
 async function fetchUserDetails(req, res, next) {
-    const { email } = req.body; // Change to query parameter
+    const email = req.query.email; 
+
+    console.log(email);
 
     if (!email) {
         return res
