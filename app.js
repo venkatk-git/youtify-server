@@ -10,6 +10,7 @@ const app = express();
 const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
 const feedRoutes = require("./routes/feed.routes");
+const videoRoutes = require("./routes/video.routes");
 
 app.use(
     cookieSession({
@@ -48,5 +49,6 @@ app.use(express.json());
 app.use("/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/feed", feedRoutes);
+app.use("/api/video", videoRoutes);
 
 module.exports = app;

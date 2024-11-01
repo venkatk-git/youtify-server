@@ -17,16 +17,16 @@ async function fetchUserDetails(req, res, next) {
     }
 
     try {
-        const user = await User.findOne({ email }, "details"); // Get user details
+        const user = await User.findOne({ email }, "details"); 
 
         if (!user) {
             return res.status(404).json({ error: "User not found" });
         }
 
-        req.user = user; // Store user details in request
+        req.user = user; 
         next();
     } catch (error) {
-        console.error("Error fetching user details:", error); // Log the error for debugging
+        console.error("Error fetching user details:", error); 
         res.status(500).json({ error: "Error fetching user details" });
     }
 }
