@@ -64,4 +64,41 @@ router.get("/getChannelInfo", async (req, res) => {
     }
 });
 
+router.get("/getVideoInfo", async (req, res) => {
+    const videoId = req.query.videoId;
+
+    if (!videoId) {
+        return res.status(400).json({ error: "Video ID is required" });
+    }
+
+    const url = `${YOUTUBE_API_URL}?id=${videoId}&key=${YOUTUBE_API_KEY}&part=snippet`;
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(
+                `Error fetching video info: ${response.statusText}`
+            );
+        }
+
+        const data = await response.json();
+
+        if (data.items && data.items.length > 0) {
+            const snippet = data.items[0].snippet;
+            res.status(200).json({
+                title: snippet.title,
+                description: snippet.description,
+                publishedAt: snippet.publishedAt,
+                thumbnails: snippet.thumbnails,
+                channelTitle: snippet.channelTitle,
+            });
+        } else {
+            res.status(404).json({ error: "Video not found" });
+        }
+    } catch (error) {
+        res.status(500).json({ error: "Failed to get video info" });
+        console.error("Error fetching video info:", error);
+    }
+});
+
 module.exports = router;
