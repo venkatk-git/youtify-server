@@ -11,6 +11,7 @@ const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
 const feedRoutes = require("./routes/feed.routes");
 const videoRoutes = require("./routes/video.routes");
+const smartPlaylistRoutes = require("./routes/smartPlaylist.routes.js");
 
 app.use(
     cookieSession({
@@ -50,5 +51,6 @@ app.use("/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/feed", feedRoutes);
 app.use("/api/video", videoRoutes);
+app.use("/api/smartPlaylists", smartPlaylistRoutes);
 
 module.exports = app;
