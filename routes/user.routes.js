@@ -9,7 +9,6 @@ router.post("/", async (req, res) => {
         const { username, email, details, smartPlaylist, smartHistory } =
             req.body;
 
-        // Create a new user document
         const user = new User({
             username,
             email,
